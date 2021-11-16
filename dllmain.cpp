@@ -5,6 +5,13 @@
 #pragma comment(lib,"ws2_32.lib")
 
 
+#define UI_WINDOWS
+#define UI_IMPLEMENTATION
+extern "C" {
+#include "luigi.h"
+}
+
+
 const unsigned char inputs = 16;
 const unsigned char outputs = 16;
 const char *HOST = "192.168.4.1";
@@ -142,11 +149,24 @@ DLLEXPORT void _stdcall CSimStop(double *PInput, double *POutput, double *PUser)
     closesocket(s);
 	WSACleanup();
 }
-int WINAPI WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szComdLine, int iCmdShow);  
+int WINAPI WinMain ( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szComdLine, int iCmdShow);
 
 DLLEXPORT void _stdcall CConfigure(double *PUser)
 {
+  UILabel *label;
+  UITextbox *textbox;
+  UIButton *button;
+          
   MessageBox(NULL,TEXT("nichts zu configurieren"),TEXT("Config"), MB_OK);
+  UIInitialise();
+  UIWindow *window = UIWindowCreate(0, 0, "My First Application", 640, 480);
+  UIPanel *panel = UIPanelCreate(&window->e, UI_PANEL_GRAY | UI_PANEL_MEDIUM_SPACING);
+  label = UILabelCreate(&panel->e, 0, "Adresse IP :", -1);
+  textbox = UITextboxCreate(&panel->e, 0);
+  button = UIButtonCreate(&panel->e, 0, "Ok", -1);
+  UIMessageLoop();
+  debug("end");
+  DestroyWindow(window->hwnd);
 }
 
 BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
