@@ -1,0 +1,1 @@
+i686-w64-mingw32-gcc.exe -shared -static-libgcc -static-libstdc++  -Wl,--add-stdcall-alias dllmain.cpp -o udp2.dll -msse3 -lws2_32 -lgdi32 -luser32
