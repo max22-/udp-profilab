@@ -157,15 +157,13 @@ DLLEXPORT void _stdcall CConfigure(double *PUser)
   UITextbox *textbox;
   UIButton *button;
           
-  MessageBox(NULL,TEXT("nichts zu configurieren"),TEXT("Config"), MB_OK);
   UIInitialise();
-  UIWindow *window = UIWindowCreate(0, 0, "My First Application", 640, 480);
+  UIWindow *window = UIWindowCreate(0, 0, "Configuration", 320, 240);
   UIPanel *panel = UIPanelCreate(&window->e, UI_PANEL_GRAY | UI_PANEL_MEDIUM_SPACING);
   label = UILabelCreate(&panel->e, 0, "Adresse IP :", -1);
   textbox = UITextboxCreate(&panel->e, 0);
   button = UIButtonCreate(&panel->e, 0, "Ok", -1);
   UIMessageLoop();
-  debug("end");
   DestroyWindow(window->hwnd);
 }
 
